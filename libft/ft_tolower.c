@@ -6,7 +6,7 @@
 /*   By: mjardin <mjardin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/21 08:53:38 by mjardin           #+#    #+#             */
-/*   Updated: 2026/10/23 13:29:59 by mjardin          ###   ########.fr       */
+/*   Updated: 2026/10/23 14:37:58 by mjardin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 
 int	ft_tolower(int c)
 {
-	if (ft_isalpha(c))
+	if (c >= 'A' && c <= 'z')
 		return (c + 32);
-	else
-		return (c);
+	return (c);
 }
