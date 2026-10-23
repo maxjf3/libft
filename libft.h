@@ -6,7 +6,7 @@
 /*   By: mjardin <mjardin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/22 17:06:34 by mjardin           #+#    #+#             */
-/*   Updated: 2026/10/23 14:38:46 by mjardin          ###   ########.fr       */
+/*   Updated: 2026/10/23 18:29:24 by mjardin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char	*ft_strdup(const char *s);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strnstr(const char *big, const char *little, size_t len);
 char	*ft_strrchr(const char *s, int c);
-//char	*ft_strtrim(char const *s1, char const *set);
+char	*ft_strtrim(char const *s1, char const *set);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	**ft_split(char const*s, char c);
 size_t	ft_strlcat(char *dst, const char *src, size_t size);

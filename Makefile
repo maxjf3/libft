@@ -27,6 +27,7 @@ MY_SOURCES = ft_atoi.c \
 				ft_strnstr.c \
 				ft_strchr.c \
 				ft_substr.c \
+				ft_strtrim.c \
 				main.c
 
 

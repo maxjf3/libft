@@ -6,7 +6,7 @@
 /*   By: mjardin <mjardin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/22 17:11:07 by mjardin           #+#    #+#             */
-/*   Updated: 2026/10/23 14:38:46 by mjardin          ###   ########.fr       */
+/*   Updated: 2026/10/23 21:33:26 by mjardin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,17 @@
 
 int	main(void)
 {
-	printf("%s\n", ft_strtrim("bbjjdd", "bd");
+	int	i;
+	char **res;
+
+	i = 0;
+	res = ft_split("Bonjour comment ca va ?", ' ');
+	while (i < 5)
+	{
+		printf("%s", res[i]);
+		printf("\n");
+		i++;
+	}
+	
 	return (0);
 }

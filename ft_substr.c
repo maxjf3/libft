@@ -1,26 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memset.c                                        :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mjardin <mjardin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/10/20 10:57:32 by mjardin           #+#    #+#             */
-/*   Updated: 2026/10/23 14:38:22 by mjardin          ###   ########.fr       */
+/*   Created: 2026/10/21 11:22:22 by mjardin           #+#    #+#             */
+/*   Updated: 2026/10/23 20:24:11 by mjardin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memset(void *s, int c, size_t n)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	size_t			i;
+	char		*ret;
+	size_t		i;
 
 	i = 0;
-	while (i < n)
+	if (!s)
+		return (NULL);
+	if (len > ft_strlen(s) - start)
+		len = ft_strlen(s) - start;
+	if (start >= ft_strlen(s))
 	{
-		((unsigned char *) s)[i] = (unsigned char)c;
+		ret = malloc(1);
+		ret[0] = '\0';
+		return (ret);
+	}
+	ret = malloc((sizeof(char) * len) + 1);
+	if (!ret)
+		return (NULL);
+	while (s[start] && i < len)
+	{
+		ret[i] = s[start];
+		start++;
 		i++;
 	}
-	return ((unsigned char)s);
+	ret[i] = '\0';
+	return (ret);
 }

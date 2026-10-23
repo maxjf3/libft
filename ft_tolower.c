@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_split.c                                         :+:      :+:    :+:   */
+/*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mjardin <mjardin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/10/22 13:37:23 by mjardin           #+#    #+#             */
-/*   Updated: 2026/10/23 14:38:19 by mjardin          ###   ########.fr       */
+/*   Created: 2026/10/21 08:53:38 by mjardin           #+#    #+#             */
+/*   Updated: 2026/10/23 20:42:33 by mjardin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	**ft_split(char const*s, char c)
+int	ft_tolower(int c)
 {
-	(void) s;
-	(void) c;
-	return (NULL);
+	if (c >= 'A' && c <= 'Z')
+		return (c + 32);
+	return (c);
 }
