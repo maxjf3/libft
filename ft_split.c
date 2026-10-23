@@ -6,14 +6,14 @@
 /*   By: mjardin <mjardin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/22 13:37:23 by mjardin           #+#    #+#             */
-/*   Updated: 2026/10/23 21:43:09 by mjardin          ###   ########.fr       */
+/*   Updated: 2026/10/23 23:01:24 by mjardin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdio.h>
 
-int		count_words(char const *s, char c)
+int	count_words(char const *s, char c)
 {
 	int		words;
 	size_t	i;
@@ -34,7 +34,7 @@ int		count_words(char const *s, char c)
 	return (words);
 }
 
-int		get_words_size(char const *s, char c)
+int	get_words_size(char const *s, char c)
 {
 	size_t	i;
 	int		size;
@@ -52,36 +52,28 @@ int		get_words_size(char const *s, char c)
 char	**ft_split(char const *s, char c)
 {
 	char	**res;
-	int		words;
 	int		i;
 	int		j;
-	int		k;
 
-	words = count_words(s, c);
-	res = malloc(sizeof(char *) * words);
-	if (!res)
+	res = ft_calloc(count_words(s, c) + 1, sizeof(char *));
+	if (!res || !s)
 		return (NULL);
 	i = 0;
 	j = 0;
-	while (j < words)
+	while (j < count_words(s, c))
 	{
-		k = 0;
-		if (s[i] != c)
+		if (s[i] && s[i] != c)
 		{
-			res[j] = malloc((sizeof(char) * get_words_size(s + i, c)));
+			res[j] = malloc((sizeof(char) * get_words_size(s + i, c)) + 1);
 			if (!res[j])
 				return (NULL);
+			ft_strlcpy(res[j], s + i, get_words_size(s + i, c) + 1);
 			while (s[i] && s[i] != c)
-			{
-				res[j][k] = s[i];
 				i++;
-				k++;
-			}
-			res[j][k] = '\0';
 			j++;
 		}
-		else
-			i++;
+		i++;
 	}
+	res[j] = 0;
 	return (res);
 }
