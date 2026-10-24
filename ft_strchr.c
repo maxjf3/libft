@@ -6,7 +6,7 @@
 /*   By: mjardin <mjardin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/21 20:50:12 by mjardin           #+#    #+#             */
-/*   Updated: 2026/10/23 23:07:50 by mjardin          ###   ########.fr       */
+/*   Updated: 2026/10/24 01:52:21 by mjardin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,6 @@ char	*ft_strchr(const char *s, int c)
 		i++;
 	}
 	if (s[i] == (char)c)
-			return ((char *)s + i);
+		return ((char *)s + i);
 	return (NULL);
 }
