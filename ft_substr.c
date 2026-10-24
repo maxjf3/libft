@@ -6,7 +6,7 @@
 /*   By: mjardin <mjardin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/21 11:22:22 by mjardin           #+#    #+#             */
-/*   Updated: 2026/10/23 20:24:11 by mjardin          ###   ########.fr       */
+/*   Updated: 2026/10/24 16:47:57 by mjardin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	if (start >= ft_strlen(s))
 	{
 		ret = malloc(1);
+		if (!ret)
+			return (NULL);
 		ret[0] = '\0';
 		return (ret);
 	}

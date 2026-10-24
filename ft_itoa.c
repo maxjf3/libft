@@ -6,7 +6,7 @@
 /*   By: mjardin <mjardin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/22 15:30:15 by mjardin           #+#    #+#             */
-/*   Updated: 2026/10/24 00:59:16 by mjardin          ###   ########.fr       */
+/*   Updated: 2026/10/24 17:34:08 by mjardin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@ long	ft_getsize(long n)
 	return (i);
 }
 
-#include <stdio.h>
-
 char	*ft_itoa(int n)
 {
 	char	*res;
@@ -37,34 +35,19 @@ char	*ft_itoa(int n)
 	if (n_long < 0)
 	{
 		n_long = -n_long;
-		res = ft_calloc(ft_getsize(n_long) + 1, (sizeof(char)));
+		res = ft_calloc(ft_getsize(n_long) + 2, (sizeof(char)));
 		res[0] = '-';
-		n_long = -n_long;
 	}
 	else
 		res = ft_calloc(ft_getsize(n_long) + 1, (sizeof(char)));
 	if (!res)
 		return (NULL);
-	if (n_long < 0)
+	i = ft_getsize(n_long) - 1;
+	while (i >= 0 && (i >= 0 || n_long > 0))
 	{
-		n_long = -n_long;
-		i = ft_getsize(n_long);
-		while (i > 0)
-		{
-			res[i] = (n_long % 10) + '0';
-			n_long /= 10;
-			i--;
-		}
-	}
-	else
-	{
-		i = ft_getsize(n_long) - 1;
-		while (i >= 0)
-		{
-			res[i] = (n_long % 10) + '0';
-			n_long /= 10;
-			i--;
-		}
+		res[i] = (n_long % 10) + '0';
+		n_long /= 10;
+		i--;
 	}
 	return (res);
 }

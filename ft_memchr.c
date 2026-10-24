@@ -6,7 +6,7 @@
 /*   By: mjardin <mjardin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/21 09:18:37 by mjardin           #+#    #+#             */
-/*   Updated: 2026/10/24 03:43:10 by mjardin          ###   ########.fr       */
+/*   Updated: 2026/10/24 16:51:45 by mjardin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	*ft_memchr(const void *s, int c, size_t n)
 {
 	const unsigned char	*s_ptr;
-	size_t			i;
+	size_t				i;
 
 	s_ptr = (const unsigned char *)s;
 	i = 0;

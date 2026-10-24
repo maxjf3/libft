@@ -6,7 +6,7 @@
 /*   By: mjardin <mjardin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/22 17:11:07 by mjardin           #+#    #+#             */
-/*   Updated: 2026/10/24 03:16:30 by mjardin          ###   ########.fr       */
+/*   Updated: 2026/10/24 16:59:29 by mjardin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,42 +14,68 @@
 
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
-#include "libft.h"
+#include <limits.h>
 
-static void	test_strncmp(char *s1, char *s2, size_t n, char *name)
+/* Ta fonction */
+char *ft_itoa(int n);
+
+/* Fonction de comparaison */
+static int test_itoa(int n)
 {
-	int	real;
-	int	mine;
+    char expected[12];
+    char *result;
 
-	real = strncmp(s1, s2, n);
-	mine = ft_strncmp(s1, s2, n);
-	if ((real == 0 && mine == 0)
-		|| (real < 0 && mine < 0)
-		|| (real > 0 && mine > 0))
-		printf("[OK]   %s\n", name);
-	else
-		printf("[FAIL] %s | strncmp: %d | ft_strncmp: %d\n",
-			name, real, mine);
+    snprintf(expected, sizeof(expected), "%d", n);
+    result = ft_itoa(n);
+
+    if (!result)
+    {
+        printf("FAIL | n = %d | ft_itoa retourne NULL\n", n);
+        return (1);
+    }
+
+    if (strcmp(result, expected) != 0)
+    {
+        printf("FAIL | n = %d | attendu = \"%s\" | obtenu = \"%s\"\n",
+            n, expected, result);
+        free(result);
+        return (1);
+    }
+
+    printf("OK   | n = %d | \"%s\"\n", n, result);
+    free(result);
+    return (0);
 }
 
-int	main(void)
+int main(void)
 {
-	printf("=== TESTS FT_STRNCMP ===\n\n");
+    int failures = 0;
+    int tests[] = {
+        0,
+        1,
+        -1,
+        42,
+        -42,
+        9,
+        10,
+        99,
+        100,
+        -100,
+        12345,
+        -12345,
+        INT_MAX,
+        INT_MIN
+    };
+    size_t i;
 
-	test_strncmp("hello", "hello", 5, "Chaines identiques");
-	test_strncmp("hello", "world", 5, "Chaines differentes");
-	test_strncmp("abc", "abd", 3, "Difference au dernier caractere");
-	test_strncmp("abc", "abcd", 4, "Premiere chaine plus courte");
-	test_strncmp("abcd", "abc", 4, "Deuxieme chaine plus courte");
-	test_strncmp("hello", "world", 0, "n egal a zero");
-	test_strncmp("abc", "abd", 2, "Difference apres n");
-	test_strncmp("", "", 5, "Deux chaines vides");
-	test_strncmp("", "abc", 3, "Premiere chaine vide");
-	test_strncmp("abc", "", 3, "Deuxieme chaine vide");
-	test_strncmp("42", "42", 2, "Chiffres identiques");
-	test_strncmp("abc", "ABC", 3, "Difference majuscules/minuscules");
-	test_strncmp("abc", "abc", 7, "abc");
+    for (i = 0; i < sizeof(tests) / sizeof(tests[0]); i++)
+        failures += test_itoa(tests[i]);
 
-	return (0);
+    printf("\nRésultat : %zu tests, %d échec(s)\n",
+        sizeof(tests) / sizeof(tests[0]), failures);
+
+    return (failures != 0);
 }
+

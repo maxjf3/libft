@@ -6,7 +6,7 @@
 /*   By: mjardin <mjardin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/09 13:31:32 by mjardin           #+#    #+#             */
-/*   Updated: 2026/10/23 14:38:26 by mjardin          ###   ########.fr       */
+/*   Updated: 2026/10/24 12:52:36 by mjardin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ int	ft_memcmp(const void *s1, const void *s2, size_t n)
 	s1_ptr = (unsigned char *)s1;
 	s2_ptr = (unsigned char *)s2;
 	i = 0;
-	while ((s1_ptr[i] || s2_ptr[i]) && i < n)
+	while (i < n)
 	{
-		if (s1_ptr[i] - s2_ptr[i] != 0)
+		if (s1_ptr[i] != s2_ptr[i])
 			return (s1_ptr[i] - s2_ptr[i]);
 		i++;
 	}

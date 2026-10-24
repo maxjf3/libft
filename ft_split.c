@@ -6,14 +6,14 @@
 /*   By: mjardin <mjardin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/22 13:37:23 by mjardin           #+#    #+#             */
-/*   Updated: 2026/10/23 23:01:24 by mjardin          ###   ########.fr       */
+/*   Updated: 2026/10/24 17:34:12 by mjardin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdio.h>
 
-int	count_words(char const *s, char c)
+static int	count_words(char const *s, char c)
 {
 	int		words;
 	size_t	i;
@@ -34,7 +34,7 @@ int	count_words(char const *s, char c)
 	return (words);
 }
 
-int	get_words_size(char const *s, char c)
+static int	get_words_size(char const *s, char c)
 {
 	size_t	i;
 	int		size;

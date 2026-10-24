@@ -6,7 +6,7 @@
 /*   By: mjardin <mjardin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/21 13:50:50 by mjardin           #+#    #+#             */
-/*   Updated: 2026/10/23 14:38:13 by mjardin          ###   ########.fr       */
+/*   Updated: 2026/10/24 16:50:49 by mjardin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	s2_len = ft_strlen((char *)s2);
 	i = 0;
 	j = 0;
-	res = malloc (sizeof(char *) * (s1_len + s2_len));
+	res = malloc (sizeof(char *) * (s1_len + s2_len) + 1);
 	if (!res)
 		return (NULL);
 	while (i < s1_len)
@@ -38,5 +38,6 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		i++;
 		j++;
 	}
+	res[i] = '\0';
 	return (res);
 }

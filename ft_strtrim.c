@@ -6,7 +6,7 @@
 /*   By: mjardin <mjardin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/22 07:47:24 by mjardin           #+#    #+#             */
-/*   Updated: 2026/10/23 20:38:34 by mjardin          ###   ########.fr       */
+/*   Updated: 2026/10/24 13:05:36 by mjardin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,8 @@ char	*ft_strtrim(char const *s1, char const *set)
 	int	start;
 	int	end;
 
-	if (!s1)
+	if (!set || !s1)
 		return (NULL);
-	if (!set)
-		return ((char *)s1);
 	start = 0;
 	end = ft_strlen(s1) - 1;
 	while (in_set(s1[start], set))
