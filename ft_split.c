@@ -64,9 +64,17 @@ char	**ft_split(char const *s, char c)
 	{
 		if (s[i] && s[i] != c)
 		{
-			res[j] = malloc((sizeof(char) * get_words_size(s + i, c)) + 1);
+			res[j] = ft_calloc(sizeof(char), get_words_size(s + i, c) + 1);
 			if (!res[j])
+			{
+				while (j >= 0)
+				{
+					free(res[j]);
+					j--;
+				}
+				free (res);
 				return (NULL);
+			}
 			ft_strlcpy(res[j], s + i, get_words_size(s + i, c) + 1);
 			while (s[i] && s[i] != c)
 				i++;
