@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-long	ft_getsize(long n)
+static long	ft_getsize(long n)
 {
 	long	i;
 
@@ -25,25 +25,47 @@ long	ft_getsize(long n)
 	return (i);
 }
 
+char	*ft_alloc_neg(long *n_long, int *i)
+{
+	char	*res;
+
+	*n_long *= -1;
+	res = ft_calloc(ft_getsize(*n_long) + 2, (sizeof(char)));
+	if (!res)
+		return (NULL);
+	res[0] = '-';
+	*i = ft_getsize(*n_long) + 1;
+	res[ft_getsize(*n_long) + 2] = '\0';
+	return (res);
+}
+
+char	*ft_alloc_pos(long *n_long, int *i)
+{
+	char	*res;
+
+	res = ft_calloc(ft_getsize(*n_long) + 1, (sizeof(char)));
+	*i = ft_getsize(*n_long);
+	res[ft_getsize(*n_long) + 1] = '\0';
+	return (res);
+}
+
 char	*ft_itoa(int n)
 {
 	char	*res;
 	int		i;
 	long	n_long;
 
-	n_long = (long)n; 
+	n_long = (long)n;
+	if (n == 0)
+		return (ft_strdup("0"));
 	if (n_long < 0)
-	{
-		n_long = -n_long;
-		res = ft_calloc(ft_getsize(n_long) + 2, (sizeof(char)));
-		res[0] = '-';
-	}
+		res = ft_alloc_neg(&n_long, &i);
 	else
-		res = ft_calloc(ft_getsize(n_long) + 1, (sizeof(char)));
+		res = ft_alloc_pos(&n_long, &i);
+	i--;
 	if (!res)
 		return (NULL);
-	i = ft_getsize(n_long) - 1;
-	while (i >= 0 && (i >= 0 || n_long > 0))
+	while (n_long > 0)
 	{
 		res[i] = (n_long % 10) + '0';
 		n_long /= 10;
