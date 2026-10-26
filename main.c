@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mjardin <mjardin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: max <max@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/22 17:11:07 by mjardin           #+#    #+#             */
-/*   Updated: 2026/10/26 14:34:22 by mjardin          ###   ########.fr       */
+/*   Updated: 2026/10/26 17:29:19 by max              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,103 +17,140 @@
 // 	return (0);
 // }
 
+
 #include "libft.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-static int total = 0;
-static int passed = 0;
+static int g_del_count = 0;
 
-static void result(char *name, int ok)
+void test_del(void *content)
 {
-    total++;
-    if (ok)
-    {
-        passed++;
-        printf("\033[32m[PASS]\033[0m %s\n", name);
-    }
-    else
-        printf("\033[31m[FAIL]\033[0m %s\n", name);
+    g_del_count++;
+    free(content);
 }
 
-static void test_empty_list(void)
+t_list *new_node(char *str)
 {
-    t_list *lst = NULL;
-    t_list *node = ft_lstnew("42");
+    char    *copy;
+    t_list  *node;
 
+    copy = strdup(str);
+    if (!copy)
+        return (NULL);
+    node = ft_lstnew(copy);
     if (!node)
-    {
-        result("Ajout dans une liste vide", 0);
-        return;
-    }
-    ft_lstadd_back(&lst, node);
-    result("Liste vide: premier element ajoute", lst == node);
-    result("Liste vide: next vaut NULL", lst->next == NULL);
-    result("Liste vide: contenu correct",
-        strcmp((char *)lst->content, "42") == 0);
-    free(node);
+        free(copy);
+    return (node);
 }
 
-static void test_one_element(void)
+void check(char *name, int condition)
 {
-    t_list *lst = ft_lstnew("A");
-    t_list *node = ft_lstnew("B");
-
-    if (!lst || !node)
-    {
-        free(lst);
-        free(node);
-        result("Ajout apres un element", 0);
-        return;
-    }
-    ft_lstadd_back(&lst, node);
-    result("Un element: le nouveau est en deuxieme position",
-        lst->next == node);
-    result("Un element: dernier next vaut NULL",
-        node->next == NULL);
-    result("Un element: ancien contenu conserve",
-        strcmp((char *)lst->content, "A") == 0);
-    free(node);
-    free(lst);
-}
-
-static void test_multiple_elements(void)
-{
-    t_list *lst = ft_lstnew("A");
-    t_list *b = ft_lstnew("B");
-    t_list *c = ft_lstnew("C");
-
-    if (!lst || !b || !c)
-    {
-        free(lst);
-        free(b);
-        free(c);
-        result("Ajout dans une liste multiple", 0);
-        return;
-    }
-    ft_lstadd_back(&lst, b);
-    ft_lstadd_back(&lst, c);
-    result("Multiple: ordre A -> B -> C",
-        lst->next == b && b->next == c);
-    result("Multiple: dernier next vaut NULL",
-        c->next == NULL);
-    free(c);
-    free(b);
-    free(lst);
+    printf("  %s : %s\n", name, condition ? "OK" : "KO");
 }
 
 int main(void)
 {
-    printf("\n=== TESTS FT_LSTADD_BACK ===\n\n");
-    test_empty_list();
-    test_one_element();
-    test_multiple_elements();
-    printf("\n===========================\n");
-    printf("RESULTAT: %d/%d tests reussis\n", passed, total);
-    if (passed == total)
-        printf("\033[32mTOUT EST OK !\033[0m\n");
-    else
-        printf("\033[31mIL Y A DES ERREURS !\033[0m\n");
-    return (passed != total);
+    t_list *lst;
+
+    printf("\n========== TEST 1 : LISTE DE 3 ELEMENTS ==========\n");
+    printf("Avant : [A] -> [B] -> [C] -> NULL\n");
+    printf("Attendu :\n");
+    printf("  - Les 3 contenus sont supprimes\n");
+    printf("  - Les 3 maillons sont liberes\n");
+    printf("  - del est appele exactement 3 fois\n");
+    printf("  - lst devient NULL\n\n");
+
+    g_del_count = 0;
+    lst = new_node("A");
+    lst->next = new_node("B");
+    lst->next->next = new_node("C");
+
+    ft_lstclear(&lst, test_del);
+
+    printf("Resultats :\n");
+    printf("  Appels de del : %d (attendu : 3)\n", g_del_count);
+    printf("  lst : %p (attendu : NULL)\n", (void *)lst);
+    check("Nombre d'appels de del", g_del_count == 3);
+    check("Liste remise a NULL", lst == NULL);
+
+    printf("\n========== TEST 2 : UN SEUL ELEMENT ==========\n");
+    printf("Avant : [SEUL] -> NULL\n");
+    printf("Attendu :\n");
+    printf("  - Le contenu SEUL est supprime\n");
+    printf("  - Le maillon est libere\n");
+    printf("  - del est appele exactement 1 fois\n");
+    printf("  - lst devient NULL\n\n");
+
+    g_del_count = 0;
+    lst = new_node("SEUL");
+
+    ft_lstclear(&lst, test_del);
+
+    printf("Resultats :\n");
+    printf("  Appels de del : %d (attendu : 1)\n", g_del_count);
+    printf("  lst : %p (attendu : NULL)\n", (void *)lst);
+    check("Nombre d'appels de del", g_del_count == 1);
+    check("Liste remise a NULL", lst == NULL);
+
+    printf("\n========== TEST 3 : LISTE VIDE ==========\n");
+    printf("Avant : lst -> NULL\n");
+    printf("Attendu :\n");
+    printf("  - Aucun element a supprimer\n");
+    printf("  - del n'est jamais appele\n");
+    printf("  - lst reste NULL\n");
+    printf("  - Aucun crash\n\n");
+
+    g_del_count = 0;
+    lst = NULL;
+
+    ft_lstclear(&lst, test_del);
+
+    printf("Resultats :\n");
+    printf("  Appels de del : %d (attendu : 0)\n", g_del_count);
+    printf("  lst : %p (attendu : NULL)\n", (void *)lst);
+    check("Aucun appel de del", g_del_count == 0);
+    check("Liste toujours NULL", lst == NULL);
+
+    printf("\n========== TEST 4 : POINTEUR NULL ==========\n");
+    printf("Avant : lst n'existe pas (argument NULL)\n");
+    printf("Attendu :\n");
+    printf("  - La fonction ne doit pas dereferencer NULL\n");
+    printf("  - del n'est jamais appele\n");
+    printf("  - Aucun crash\n\n");
+
+    g_del_count = 0;
+
+    ft_lstclear(NULL, test_del);
+
+    printf("Resultats :\n");
+    printf("  Appels de del : %d (attendu : 0)\n", g_del_count);
+    check("Aucun appel de del", g_del_count == 0);
+    printf("  Aucun crash : OK\n");
+
+    printf("\n========== TEST 5 : CONTENT NULL ==========\n");
+    printf("Avant : [content = NULL] -> NULL\n");
+    printf("Attendu :\n");
+    printf("  - Le maillon existe meme si son contenu est NULL\n");
+    printf("  - del est appele 1 fois avec NULL\n");
+    printf("  - free(NULL) ne provoque pas de crash\n");
+    printf("  - Le maillon est libere\n");
+    printf("  - lst devient NULL\n\n");
+
+    g_del_count = 0;
+    lst = ft_lstnew(NULL);
+
+    ft_lstclear(&lst, test_del);
+
+    printf("Resultats :\n");
+    printf("  Appels de del : %d (attendu : 1)\n", g_del_count);
+    printf("  lst : %p (attendu : NULL)\n", (void *)lst);
+    check("Nombre d'appels de del", g_del_count == 1);
+    check("Liste remise a NULL", lst == NULL);
+
+    printf("\n========== FIN DES TESTS ==========\n");
+    printf("IMPORTANT : verifier aussi les fuites memoire avec ASan.\n");
+
+    return (0);
 }
