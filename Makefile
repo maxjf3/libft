@@ -47,9 +47,7 @@ MY_SOURCES =	ft_atoi.c \
 
 MY_OBJECTS = $(MY_SOURCES:.c=.o) 
 
-
-CFLAGS = -Wall -Werror -Wextra
-DEBUGFLAGS = -g -lbsd -fPIC
+CFLAGS = -Wall -Wextra -Werror
 
 all: $(NAME)
 
@@ -58,9 +56,6 @@ $(NAME): $(MY_OBJECTS)
 
 %.o: %.c
 	@$(CC) $(CFLAGS) -c $< -o $@
-
-debug: $(MY_OBJECTS)
-	@$(CC) $(CFLAGS) $(MY_OBJECTS) $(DEBUGFLAGS)
 
 clean:
 	@rm -f $(MY_OBJECTS)
