@@ -1,5 +1,6 @@
 NAME = libft.a
 $(CC) = cc
+
 MY_SOURCES =	ft_atoi.c \
 				ft_bzero.c \
 				ft_calloc.c \
@@ -42,10 +43,10 @@ MY_SOURCES =	ft_atoi.c \
 				ft_lstdelone.c \
 				ft_lstclear.c \
 				ft_lstiter.c \
-				main.c
+				ft_lstmap.c \
 
+MY_OBJECTS = $(MY_SOURCES:.c=.o) 
 
-MY_OBJECTS = $(MY_SOURCES:.c=.o)
 
 CFLAGS = -Wall -Werror -Wextra
 DEBUGFLAGS = -g -lbsd -fPIC

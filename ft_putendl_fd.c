@@ -6,7 +6,7 @@
 /*   By: mjardin <mjardin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/24 01:53:39 by mjardin           #+#    #+#             */
-/*   Updated: 2026/10/24 16:53:16 by mjardin          ###   ########.fr       */
+/*   Updated: 2026/10/27 16:22:18 by mjardin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	ft_putendl_fd(char *s, int fd)
 {
+	if (!s || !fd)
+		return ;
 	ft_putstr_fd(s, fd);
 	ft_putchar_fd('\n', fd);
 }

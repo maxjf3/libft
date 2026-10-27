@@ -6,7 +6,7 @@
 /*   By: mjardin <mjardin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/21 10:08:54 by mjardin           #+#    #+#             */
-/*   Updated: 2026/10/24 16:52:14 by mjardin          ###   ########.fr       */
+/*   Updated: 2026/10/27 15:18:25 by mjardin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*ft_strnstr(const char *big, const char *little, size_t len)
 	big_ptr = (char *)big;
 	if (ft_strlen((char *)little) > ft_strlen(big_ptr))
 		return (NULL);
-	if (ft_strlen(big_ptr) == 0)
+	if (ft_strlen(big_ptr) == 0 || ft_strlen(little) <= 0)
 		return (big_ptr + i);
 	while (big_ptr[i] && i < len)
 	{

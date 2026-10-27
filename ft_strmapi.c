@@ -6,7 +6,7 @@
 /*   By: mjardin <mjardin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/24 01:11:10 by mjardin           #+#    #+#             */
-/*   Updated: 2026/10/24 16:52:58 by mjardin          ###   ########.fr       */
+/*   Updated: 2026/10/27 16:21:27 by mjardin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	char	*res;
 
 	i = 0;
+	if (!s || !f)
+		return (NULL);
 	res = malloc(sizeof(char) * ft_strlen(s) + 1);
 	if (!res)
 		return (NULL);

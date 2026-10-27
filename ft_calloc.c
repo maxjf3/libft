@@ -6,7 +6,7 @@
 /*   By: mjardin <mjardin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/21 10:48:56 by mjardin           #+#    #+#             */
-/*   Updated: 2026/10/24 13:56:58 by mjardin          ###   ########.fr       */
+/*   Updated: 2026/10/27 16:06:21 by mjardin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	*ft_calloc(size_t nmemb, size_t size)
 
 	if (nmemb <= 0 || size <= 0)
 	{
-		nmemb_m = malloc(1);
+		nmemb_m = malloc(0);
 		return (nmemb_m);
 	}
 	if (nmemb >= SIZE_MAX / size)

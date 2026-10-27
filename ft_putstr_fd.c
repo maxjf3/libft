@@ -6,7 +6,7 @@
 /*   By: mjardin <mjardin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/24 01:44:12 by mjardin           #+#    #+#             */
-/*   Updated: 2026/10/24 16:53:26 by mjardin          ###   ########.fr       */
+/*   Updated: 2026/10/27 16:23:54 by mjardin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	ft_putstr_fd(char *s, int fd)
 	int	i;
 
 	i = 0;
+	if (!s || !fd)
+		return ;
 	while (s[i])
 	{
 		ft_putchar_fd(s[i], fd);

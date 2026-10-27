@@ -6,7 +6,7 @@
 /*   By: mjardin <mjardin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/22 15:30:15 by mjardin           #+#    #+#             */
-/*   Updated: 2026/10/24 17:34:08 by mjardin          ###   ########.fr       */
+/*   Updated: 2026/10/27 16:25:22 by mjardin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static long	ft_getsize(long n)
 	return (i);
 }
 
-char	*ft_alloc_neg(long *n_long, int *i)
+static char	*ft_alloc_neg(long *n_long, int *i)
 {
 	char	*res;
 
@@ -39,11 +39,13 @@ char	*ft_alloc_neg(long *n_long, int *i)
 	return (res);
 }
 
-char	*ft_alloc_pos(long *n_long, int *i)
+static char	*ft_alloc_pos(long *n_long, int *i)
 {
 	char	*res;
 
 	res = ft_calloc(ft_getsize(*n_long) + 1, (sizeof(char)));
+	if (!res)
+		return (NULL);
 	*i = ft_getsize(*n_long);
 	res[ft_getsize(*n_long) + 1] = '\0';
 	return (res);
